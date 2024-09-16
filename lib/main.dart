@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:group_monday_m1/counter_screen.dart';
 import 'package:group_monday_m1/home_screen.dart';
+import 'package:group_monday_m1/login_screen.dart';
+import 'package:group_monday_m1/messenger_screen.dart';
 
 void main()
 {
   runApp(const MyApp());
-
 }
 
 class MyApp extends StatelessWidget
@@ -16,9 +18,9 @@ class MyApp extends StatelessWidget
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        useMaterial3: false
+
       ),
-      home: const HomeScreen(),
+      home: const CounterScreen(),
     );
   }
 
