@@ -22,9 +22,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // theme: getLightMode(),
+       theme: getLightMode(),
       darkTheme: getDarkMode(),
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       home: BmiCalculator(),
     );
   }
