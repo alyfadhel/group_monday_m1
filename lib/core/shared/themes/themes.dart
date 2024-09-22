@@ -58,7 +58,7 @@ ThemeData getDarkMode()
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.pink,
-        statusBarBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.light
       ),
       centerTitle: true,
     ),

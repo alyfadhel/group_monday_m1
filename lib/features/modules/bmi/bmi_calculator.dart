@@ -30,7 +30,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
         ),
         child: SingleChildScrollView(
           child: SizedBox(
-            height: 700.0,
+            height: 700,
             child: Column(
               children: [
                 Expanded(
