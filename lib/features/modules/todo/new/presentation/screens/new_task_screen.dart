@@ -40,7 +40,7 @@ class NewTaskScreen extends StatelessWidget {
                   'No Tasks Yet',
                   style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                         color: Colors.grey,
-                    fontSize: 50.0,
+                    fontSize: 60.0,
                       ),
                 ),
                 const Icon(
