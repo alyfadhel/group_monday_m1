@@ -7,8 +7,12 @@ ThemeData getLightMode()
   return ThemeData(
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
+      actionsIconTheme: IconThemeData(
+          color: Colors.black,
+      ),
       iconTheme: IconThemeData(
         color: Colors.black,
+        size: 30.0
       ),
       titleTextStyle: TextStyle(
         fontSize: 20.0,
@@ -56,11 +60,15 @@ ThemeData getDarkMode()
       backgroundColor: Colors.black,
       iconTheme: IconThemeData(
         color: Colors.white,
+        size: 30.0
       ),
       titleTextStyle: TextStyle(
         fontSize: 20.0,
         color: Colors.white,
         fontWeight: FontWeight.bold,
+      ),
+      actionsIconTheme: IconThemeData(
+        color: Colors.white
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.black,

@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
              theme: getLightMode(),
             darkTheme: getDarkMode(),
-            themeMode: ThemeMode.dark,
+            themeMode: ThemeMode.light,
             home: const NewsLayout(),
           );
         },
