@@ -8,11 +8,10 @@ import 'package:group_monday_m1/features/modules/todo/new/presentation/screens/n
 import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart';
 
-class AppCubit extends Cubit<AppStates>
-{
-  AppCubit():super(AppInitialState());
+class AppCubit extends Cubit<AppStates> {
+  AppCubit() : super(AppInitialState());
 
-  static AppCubit get(context)=>BlocProvider.of(context);
+  static AppCubit get(context) => BlocProvider.of(context);
 
   List<BottomNavigationBarItem> items = [
     const BottomNavigationBarItem(
@@ -53,25 +52,23 @@ class AppCubit extends Cubit<AppStates>
   var titleController = TextEditingController();
   var timeController = TextEditingController();
   var dateController = TextEditingController();
-  List<Map> tasks = [];
+  List<Map> newTasks = [];
+  List<Map> doneTasks = [];
+  List<Map> archiveTasks = [];
 
   void changeFabIcon({
     required bool isShow,
     required IconData icon,
-})
-  {
+  }) {
     isShowBottomSheet = isShow;
     fabIcon = icon;
     emit(AppChangeFabIconState());
   }
 
-  void changeBottomNav(index)
-  {
+  void changeBottomNav(index) {
     currentIndex = index;
     emit(AppChangeBottomNavState());
   }
-
-
 
   void createDataFromDatabase() async {
     var databasesPath = await getDatabasesPath();
@@ -93,11 +90,11 @@ class AppCubit extends Cubit<AppStates>
           'CREATE TABLE tasks (id INTEGER PRIMARY KEY, title TEXT, time TEXT, date TEXT, status TEXT)',
         )
             .then(
-              (value) {
+          (value) {
             print('Table created');
           },
         ).catchError(
-              (error) {
+          (error) {
             print('Error when table created ${error.toString()}');
           },
         );
@@ -107,7 +104,7 @@ class AppCubit extends Cubit<AppStates>
         print('Database opened');
       },
     ).then(
-          (value) {
+      (value) {
         database = value;
       },
     );
@@ -124,13 +121,13 @@ class AppCubit extends Cubit<AppStates>
         'INSERT INTO tasks(title, time, date, status) VALUES("$title", "$time", "$date", "new")',
       )
           .then(
-            (value) {
+        (value) {
           getDataFromDatabase(database);
           emit(AppInsertDataFromDatabase());
           print('$value inserted successfully');
         },
       ).catchError(
-            (error) {
+        (error) {
           print('Error when data inserted ${error.toString()}');
         },
       );
@@ -138,12 +135,53 @@ class AppCubit extends Cubit<AppStates>
   }
 
   void getDataFromDatabase(database) async {
-     await database.rawQuery('SELECT * FROM tasks').then(
-           (value) {
-         tasks = value;
-         print(tasks.toString());
-         emit(AppGetDataFromDatabase());
-       },
-     );
+    newTasks = [];
+    doneTasks = [];
+    archiveTasks = [];
+    await database.rawQuery('SELECT * FROM tasks').then(
+      (value) {
+        value.forEach(
+          (element) {
+            if (element['status'] == 'new') {
+              newTasks.add(element);
+            } else if (element['status'] == 'done') {
+              doneTasks.add(element);
+            } else {
+              archiveTasks.add(element);
+            }
+          },
+        );
+        emit(AppGetDataFromDatabase());
+      },
+    );
+  }
+
+  void updateDataFromDatabase({
+    required String status,
+    required int id,
+  }) async {
+    await database!.rawUpdate(
+      'UPDATE tasks SET status = ? WHERE id = ?',
+      [status, id],
+    ).then(
+      (value) {
+        getDataFromDatabase(database);
+        emit(AppUpdateDataFromDatabase());
+      },
+    );
+  }
+
+  void deleteDataFromDatabase({
+    required int id,
+  }) async {
+    await database!.rawDelete(
+      'DELETE FROM tasks WHERE id = ?',
+      [id],
+    ).then(
+      (value) {
+        getDataFromDatabase(database);
+        emit(AppDeleteDataFromDatabase());
+      },
+    );
   }
 }

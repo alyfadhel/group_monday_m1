@@ -1,15 +1,15 @@
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:group_monday_m1/core/layout/todo_app.dart';
-import 'package:group_monday_m1/core/shared/themes/themes.dart';
-import 'package:group_monday_m1/features/modules/bmi/bmi_calculator.dart';
-import 'package:group_monday_m1/features/modules/counter/counter_screen.dart';
+import 'package:group_monday_m1/core/news_layout/controller/cubit.dart';
+import 'package:group_monday_m1/core/news_layout/controller/state.dart';
+import 'package:group_monday_m1/core/news_layout/news_layout.dart';
+import 'package:group_monday_m1/core/shared/network/remote/dio_helper.dart';
 import 'package:group_monday_m1/features/modules/counter/observer/observer.dart';
 
 
+
 void main() {
+  DioHelper.init();
   Bloc.observer = MyBlocObserver();
   runApp(
     // DevicePreview(
@@ -25,12 +25,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      //  theme: getLightMode(),
-      // darkTheme: getDarkMode(),
-      // themeMode: ThemeMode.dark,
-      home: TodoApp(),
+    return BlocProvider(
+      create: (BuildContext context)=> NewsCubit()..getBusinessData()..getScienceData()..getSportsData(),
+      child: BlocConsumer<NewsCubit,NewsStates>(
+        listener: (context, state) {
+
+        },
+        builder: (BuildContext context, state) {
+          return const MaterialApp(
+            debugShowCheckedModeBanner: false,
+            //  theme: getLightMode(),
+            // darkTheme: getDarkMode(),
+            // themeMode: ThemeMode.dark,
+            home: NewsLayout(),
+          );
+        },
+      ),
     );
   }
 }

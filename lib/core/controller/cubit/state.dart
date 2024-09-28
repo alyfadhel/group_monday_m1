@@ -10,3 +10,5 @@ class AppCreateDataFromDatabase extends AppStates{}
 class AppOpenDataFromDatabase extends AppStates{}
 class AppInsertDataFromDatabase extends AppStates{}
 class AppGetDataFromDatabase extends AppStates{}
+class AppUpdateDataFromDatabase extends AppStates{}
+class AppDeleteDataFromDatabase extends AppStates{}

@@ -13,6 +13,7 @@ class MyTextFormField extends StatelessWidget {
   final Function()? onTap;
   final String? Function(String?)? validator;
   final bool isPassword;
+  final Function(String)? onChanged;
 
   const MyTextFormField({
     super.key,
@@ -28,6 +29,7 @@ class MyTextFormField extends StatelessWidget {
     this.onPressed,
     this.onFieldSubmitted,
     this.onTap,
+    this.onChanged,
   });
 
   @override
@@ -39,6 +41,7 @@ class MyTextFormField extends StatelessWidget {
       obscureText: isPassword,
       onFieldSubmitted: onFieldSubmitted,
       onTap: onTap,
+      onChanged: onChanged,
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
