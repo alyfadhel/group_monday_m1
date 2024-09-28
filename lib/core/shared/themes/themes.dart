@@ -50,6 +50,9 @@ ThemeData getLightMode()
       unselectedItemColor: Colors.grey,
       selectedItemColor: Colors.blue,
     ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: Colors.blue,
+    ),
   );
 }
 
@@ -100,6 +103,9 @@ ThemeData getDarkMode()
       type: BottomNavigationBarType.fixed,
       unselectedItemColor: Colors.grey,
       selectedItemColor: Colors.deepOrange,
+    ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: Colors.deepOrange,
     ),
   );
 }
