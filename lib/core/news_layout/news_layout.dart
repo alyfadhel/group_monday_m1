@@ -18,9 +18,6 @@ class NewsLayout extends StatelessWidget {
           appBar: AppBar(
             title: Text(
               cubit.titles[cubit.currentIndex],
-              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
             ),
             actions: [
               IconButton(
@@ -46,10 +43,6 @@ class NewsLayout extends StatelessWidget {
             onTap: (index) {
               cubit.changeBottomNav(index);
             },
-            selectedItemColor: Colors.blue,
-            unselectedItemColor: Colors.grey,
-            type: BottomNavigationBarType.fixed,
-            elevation: 0.0,
           ),
           body: cubit.screens[cubit.currentIndex],
         );

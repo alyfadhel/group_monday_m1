@@ -4,6 +4,7 @@ import 'package:group_monday_m1/core/news_layout/controller/cubit.dart';
 import 'package:group_monday_m1/core/news_layout/controller/state.dart';
 import 'package:group_monday_m1/core/news_layout/news_layout.dart';
 import 'package:group_monday_m1/core/shared/network/remote/dio_helper.dart';
+import 'package:group_monday_m1/core/shared/themes/themes.dart';
 import 'package:group_monday_m1/features/modules/counter/observer/observer.dart';
 
 
@@ -32,12 +33,12 @@ class MyApp extends StatelessWidget {
 
         },
         builder: (BuildContext context, state) {
-          return const MaterialApp(
+          return MaterialApp(
             debugShowCheckedModeBanner: false,
-            //  theme: getLightMode(),
-            // darkTheme: getDarkMode(),
-            // themeMode: ThemeMode.dark,
-            home: NewsLayout(),
+             theme: getLightMode(),
+            darkTheme: getDarkMode(),
+            themeMode: ThemeMode.dark,
+            home: const NewsLayout(),
           );
         },
       ),

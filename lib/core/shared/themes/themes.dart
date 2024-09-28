@@ -18,7 +18,7 @@ ThemeData getLightMode()
       centerTitle: true,
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.white,
-        statusBarBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark
       ),
     ),
     scaffoldBackgroundColor: Colors.white,
@@ -29,16 +29,22 @@ ThemeData getLightMode()
     textTheme: const TextTheme(
       headlineLarge: TextStyle(
         fontSize: 50.0,
-        color: Colors.white,
+        color: Colors.black,
       ),
       titleLarge: TextStyle(
         fontSize: 22.0,
-        color: Colors.white,
+        color: Colors.black,
       ),
       titleSmall: TextStyle(
         fontSize: 16.0,
         color: Colors.grey,
       ),
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
+      type: BottomNavigationBarType.fixed,
+      unselectedItemColor: Colors.grey,
+      selectedItemColor: Colors.blue,
     ),
   );
 }
@@ -57,7 +63,7 @@ ThemeData getDarkMode()
         fontWeight: FontWeight.bold,
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: Colors.pink,
+        statusBarColor: Colors.black,
         statusBarIconBrightness: Brightness.light,
       ),
       centerTitle: true,
@@ -80,6 +86,12 @@ ThemeData getDarkMode()
         fontSize: 16.0,
         color: Colors.grey,
       ),
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Colors.black,
+      type: BottomNavigationBarType.fixed,
+      unselectedItemColor: Colors.grey,
+      selectedItemColor: Colors.deepOrange,
     ),
   );
 }
