@@ -62,7 +62,7 @@ class NewsCubit extends Cubit<NewsStates> {
   void getBusinessData() {
     emit(NewsGetBusinessLoadingState());
 
-    DioHelper.getData(
+    NewsDioHelper.getData(
       url: 'v2/top-headlines',
       query: {
         'country': 'us',
@@ -86,7 +86,7 @@ class NewsCubit extends Cubit<NewsStates> {
   void getSportsData() {
     emit(NewsGetSportsLoadingState());
 
-    DioHelper.getData(
+    NewsDioHelper.getData(
       url: 'v2/top-headlines',
       query: {
         'country': 'us',
@@ -110,7 +110,7 @@ class NewsCubit extends Cubit<NewsStates> {
   void getScienceData() {
     emit(NewsGetScienceLoadingState());
 
-    DioHelper.getData(
+    NewsDioHelper.getData(
       url: 'v2/top-headlines',
       query: {
         'country': 'us',
@@ -134,7 +134,7 @@ class NewsCubit extends Cubit<NewsStates> {
   void getSearchData({required String value}) {
     emit(NewsGetSearchLoadingState());
 
-    DioHelper.getData(
+    NewsDioHelper.getData(
       url: '/v2/everything',
       query: {
         'apiKey': 'cfaef72ddf46493fbea1e07aa50cd58b',

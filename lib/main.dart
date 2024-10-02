@@ -10,7 +10,7 @@ import 'package:group_monday_m1/features/modules/counter/observer/observer.dart'
 
 
 void main() {
-  DioHelper.init();
+  NewsDioHelper.init();
   Bloc.observer = MyBlocObserver();
   runApp(
       // DevicePreview(
