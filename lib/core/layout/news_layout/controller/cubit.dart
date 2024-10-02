@@ -1,11 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:group_monday_m1/core/news_layout/controller/state.dart';
+import 'package:group_monday_m1/core/layout/news_layout/controller/state.dart';
 import 'package:group_monday_m1/core/shared/network/remote/dio_helper.dart';
-import 'package:group_monday_m1/features/modules/business/presentation/screen/business_screen.dart';
-import 'package:group_monday_m1/features/modules/science/presentation/screen/science_screen.dart';
-import 'package:group_monday_m1/features/modules/sports/presentation/screen/sports_screen.dart';
+import 'package:group_monday_m1/features/modules/news/business/presentation/screen/business_screen.dart';
+import 'package:group_monday_m1/features/modules/news/science/presentation/screen/science_screen.dart';
+import 'package:group_monday_m1/features/modules/news/sports/presentation/screen/sports_screen.dart';
+
 
 
 

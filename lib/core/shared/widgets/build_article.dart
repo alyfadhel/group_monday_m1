@@ -28,7 +28,7 @@ class BuildArticle extends StatelessWidget {
               model['urlToImage'].toString(),
               placeholder: (context, url) => Shimmer.fromColors(
                 baseColor: Colors.grey,
-                highlightColor: Colors.grey,
+                highlightColor: Colors.white,
                 child: Container(
                   color: Colors.black,
                 ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:group_monday_m1/core/news_layout/controller/cubit.dart';
-import 'package:group_monday_m1/core/news_layout/controller/state.dart';
+import 'package:group_monday_m1/core/layout/news_layout/controller/cubit.dart';
+import 'package:group_monday_m1/core/layout/news_layout/controller/state.dart';
 import 'package:group_monday_m1/core/shared/widgets/build_news_items.dart';
 import 'package:group_monday_m1/core/shared/widgets/my_text_form_field.dart';
+
 
 
 class SearchScreen extends StatelessWidget {
