@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:group_monday_m1/core/layout/news_layout/controller/cubit.dart';
 import 'package:group_monday_m1/core/layout/news_layout/controller/state.dart';
 import 'package:group_monday_m1/core/layout/news_layout/news_layout.dart';
+import 'package:group_monday_m1/core/layout/shop_layout/controller/cubit/cubit.dart';
 import 'package:group_monday_m1/core/layout/shop_layout/shop_layout.dart';
 import 'package:group_monday_m1/core/shared/const/const.dart';
 import 'package:group_monday_m1/core/shared/network/local/cache_helper.dart';
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => ShopCubit()..getHomeData()..getCategoriesHome(),),
         BlocProvider(
           create: (BuildContext context) => NewsCubit()
             ..getBusinessData()
