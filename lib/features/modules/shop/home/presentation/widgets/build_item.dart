@@ -3,7 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:group_monday_m1/core/layout/shop_layout/controller/cubit/cubit.dart';
 import 'package:group_monday_m1/features/modules/shop/home/data/model/home_model.dart';
-import 'package:group_monday_m1/features/modules/shop/home/data/categories_model.dart';
+import 'package:group_monday_m1/features/modules/shop/home/data/model/categories_model.dart';
 import 'package:group_monday_m1/features/modules/shop/home/presentation/widgets/build_home_categories_item.dart';
 import 'package:group_monday_m1/features/modules/shop/home/presentation/widgets/build_product_item.dart';
 import 'package:shimmer/shimmer.dart';

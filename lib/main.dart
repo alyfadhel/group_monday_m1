@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:group_monday_m1/core/layout/news_layout/controller/cubit.dart';
 import 'package:group_monday_m1/core/layout/news_layout/controller/state.dart';
@@ -17,6 +18,9 @@ import 'package:group_monday_m1/features/modules/shop/users/presentation/screens
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations(
+  //   [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
+  // );
   await CacheHelper.init();
   NewsDioHelper.init();
   ShopDioHelper.init();
@@ -60,7 +64,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ShopCubit()..getHomeData()..getCategoriesHome(),),
+        BlocProvider(
+          create: (context) => ShopCubit()
+            ..getHomeData()
+            ..getCategoriesHome()
+            ..getFavorites(),
+        ),
         BlocProvider(
           create: (BuildContext context) => NewsCubit()
             ..getBusinessData()

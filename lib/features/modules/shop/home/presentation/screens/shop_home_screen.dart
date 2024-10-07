@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:group_monday_m1/core/layout/shop_layout/controller/cubit/cubit.dart';
 import 'package:group_monday_m1/core/layout/shop_layout/controller/cubit/state.dart';
+import 'package:group_monday_m1/core/shared/widgets/toast_state.dart';
 import 'package:group_monday_m1/features/modules/shop/home/presentation/widgets/build_item.dart';
 
 class ShopHomeScreen extends StatelessWidget {
@@ -11,7 +12,21 @@ class ShopHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopCubit, ShopStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is ShopGetChangeFavoritesSuccessState) {
+          if (state.changeFavoriteModel.status) {
+            showToastState(
+              msg: state.changeFavoriteModel.message,
+              state: ToastState.success,
+            );
+          } else {
+            showToastState(
+              msg: state.changeFavoriteModel.message,
+              state: ToastState.error,
+            );
+          }
+        }
+      },
       builder: (context, state) {
         var cubit = ShopCubit.get(context);
         return ConditionalBuilder(
