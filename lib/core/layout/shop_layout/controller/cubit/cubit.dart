@@ -12,7 +12,11 @@ import 'package:group_monday_m1/features/modules/shop/favorites/presentation/scr
 import 'package:group_monday_m1/features/modules/shop/home/data/model/change_favorites_model.dart';
 import 'package:group_monday_m1/features/modules/shop/home/data/model/home_model.dart';
 import 'package:group_monday_m1/features/modules/shop/home/data/model/categories_model.dart';
+import 'package:group_monday_m1/features/modules/shop/home/data/model/products_details_model.dart';
 import 'package:group_monday_m1/features/modules/shop/home/presentation/screens/shop_home_screen.dart';
+import 'package:group_monday_m1/features/modules/shop/search/data/search_model.dart';
+import 'package:group_monday_m1/features/modules/shop/settings/data/model/profile_model.dart';
+import 'package:group_monday_m1/features/modules/shop/settings/data/model/update_profile_model.dart';
 import 'package:group_monday_m1/features/modules/shop/settings/presentation/screens/shop_settings_screen.dart';
 
 class ShopCubit extends Cubit<ShopStates> {
@@ -51,6 +55,21 @@ class ShopCubit extends Cubit<ShopStates> {
     'Settings',
   ];
   int currentIndex = 0;
+  int current = 0;
+
+  void changeSmoothIndicator(index) {
+    current = index;
+    emit(ShopChangeSmoothIndicatorState());
+  }
+
+  void changeLanguage() {
+    if (language == 'ar') {
+      language = 'en';
+    } else {
+      language = 'ar';
+    }
+    emit(ShopChangeLanguageState());
+  }
 
   void changeBottomNav(index) {
     currentIndex = index;
@@ -66,6 +85,7 @@ class ShopCubit extends Cubit<ShopStates> {
     ShopDioHelper.getData(
       url: homeEndPoint,
       token: token,
+      lang: language,
     ).then(
       (value) {
         homeModel = HomeModel.fromJson(value.data);
@@ -101,12 +121,13 @@ class ShopCubit extends Cubit<ShopStates> {
         'product_id': productId,
       },
       token: token,
+      lang: language,
     ).then(
       (value) {
         changeFavoriteModel = ChangeFavoriteModel.fromJson(value.data);
         if (!changeFavoriteModel!.status) {
           favorites[productId] = !favorites[productId]!;
-        }else{
+        } else {
           getFavorites();
         }
         print('Change Favorites ${value.data.toString()}');
@@ -121,24 +142,24 @@ class ShopCubit extends Cubit<ShopStates> {
   }
 
   FavoritesModel? favoritesModel;
+
   void getFavorites() {
     emit(ShopGetFavoritesLoadingState());
     ShopDioHelper.getData(
       url: favoritesEndPoint,
       token: token,
-    )
-        .then(
-          (value) {
-            favoritesModel = FavoritesModel.fromJson(value.data);
-            emit(ShopGetFavoritesSuccessState());
-          },
-        )
-        .catchError(
-          (error) {
-            emit(ShopGetFavoritesErrorState(error.toString()));
-            print(error.toString());
+      lang: language,
+    ).then(
+      (value) {
+        favoritesModel = FavoritesModel.fromJson(value.data);
+        emit(ShopGetFavoritesSuccessState());
       },
-        );
+    ).catchError(
+      (error) {
+        emit(ShopGetFavoritesErrorState(error.toString()));
+        print(error.toString());
+      },
+    );
   }
 
   CategoriesModel? categoriesModel;
@@ -147,6 +168,7 @@ class ShopCubit extends Cubit<ShopStates> {
     emit(ShopGetCategoriesLoadingState());
     ShopDioHelper.getData(
       url: categoriesEndPoint,
+      lang: language,
     ).then(
       (value) {
         categoriesModel = CategoriesModel.fromJson(value.data);
@@ -159,5 +181,111 @@ class ShopCubit extends Cubit<ShopStates> {
         print(error.toString());
       },
     );
+  }
+
+  ProductsDetailsModel? productsDetailsModel;
+
+  void getProductsDetails(int id) {
+    emit(ShopGetProductDetailsLoadingState());
+    ShopDioHelper.getData(
+      url: productDetails(id),
+      token: token,
+      lang: language,
+    ).then(
+      (value) {
+        productsDetailsModel = ProductsDetailsModel.fromJson(value.data);
+        emit(ShopGetProductDetailsSuccessState());
+      },
+    ).catchError(
+      (error) {
+        emit(ShopGetProductDetailsErrorState(error.toString()));
+        print(error.toString());
+      },
+    );
+  }
+
+  var emailController = TextEditingController();
+  var nameController = TextEditingController();
+  var phoneController = TextEditingController();
+  ProfileModel? profileModel;
+
+  void getUserData() {
+    emit(ShopGetProfileLoadingState());
+    ShopDioHelper.getData(
+      url: profileEndPoint,
+      token: token,
+      lang: language,
+    ).then(
+      (value) {
+        profileModel = ProfileModel.fromJson(value.data);
+        print('Profile is${value.data.toString()}');
+        emit(ShopGetProfileSuccessState());
+      },
+    ).catchError(
+      (error) {
+        emit(ShopGetProfileErrorState(error.toString()));
+        print(error.toString());
+      },
+    );
+  }
+
+  UpdateProfileModel? updateProfileModel;
+
+  void updateUserData({
+    required String name,
+    required String email,
+    required String phone,
+  }) {
+    emit(ShopGetUpdateProfileLoadingState());
+    ShopDioHelper.putData(
+      url: updateProfileEndPoint,
+      data: {
+        'name': name,
+        'email': email,
+        'phone': phone,
+      },
+      token: token,
+      lang: language,
+    ).then(
+      (value) {
+        updateProfileModel = UpdateProfileModel.fromJson(value.data);
+        getUserData();
+        emit(ShopGetUpdateProfileSuccessState(updateProfileModel!));
+      },
+    ).catchError(
+      (error) {
+        emit(ShopGetUpdateProfileErrorState(error.toString()));
+        print(error.toString());
+      },
+    );
+  }
+
+  var searchController = TextEditingController();
+  SearchModel? searchModel;
+
+  void getSearch({
+    required String text,
+  }) {
+    emit(ShopGetSearchLoadingState());
+    ShopDioHelper.postData(
+      url: searchEndPoint,
+      data: {
+        'text': text,
+      },
+      token: token,
+      lang: language,
+    )
+        .then(
+          (value) {
+            searchModel = SearchModel.fromJson(value.data);
+            emit(ShopGetSearchSuccessState());
+          },
+        )
+        .catchError(
+          (error) {
+            emit(ShopGetSearchErrorState(error.toString()));
+            print(error.toString());
+      },
+        );
   }
 }

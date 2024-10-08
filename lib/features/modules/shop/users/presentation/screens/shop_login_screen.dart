@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:group_monday_m1/core/layout/shop_layout/shop_layout.dart';
+import 'package:group_monday_m1/core/shared/const/const.dart';
 import 'package:group_monday_m1/core/shared/network/local/cache_helper.dart';
 import 'package:group_monday_m1/core/shared/themes/cubit/cubit.dart';
 import 'package:group_monday_m1/core/shared/widgets/my_button.dart';
@@ -46,6 +47,7 @@ class ShopLoginScreen extends StatelessWidget {
                   }
                 },
               );
+              token = state.loginModel.data!.token;
             } else {
               showToastState(
                 msg: state.loginModel.message,

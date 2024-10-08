@@ -30,6 +30,8 @@ void main() async {
   token = CacheHelper.getData(key: 'token');
   bool? isDark = CacheHelper.getData(key: 'isDark');
   print(token.toString());
+  String? lang = CacheHelper.getData(key: 'language');
+  lang != null ? language = lang : language = 'en';
 
   Widget widget;
 
@@ -68,7 +70,8 @@ class MyApp extends StatelessWidget {
           create: (context) => ShopCubit()
             ..getHomeData()
             ..getCategoriesHome()
-            ..getFavorites(),
+            ..getFavorites()
+            ..getUserData(),
         ),
         BlocProvider(
           create: (BuildContext context) => NewsCubit()

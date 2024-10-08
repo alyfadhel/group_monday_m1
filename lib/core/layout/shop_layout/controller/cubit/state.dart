@@ -1,4 +1,5 @@
 import 'package:group_monday_m1/features/modules/shop/home/data/model/change_favorites_model.dart';
+import 'package:group_monday_m1/features/modules/shop/settings/data/model/update_profile_model.dart';
 
 abstract class ShopStates{}
 
@@ -40,4 +41,44 @@ class ShopGetFavoritesErrorState extends ShopStates{
   final String error;
 
   ShopGetFavoritesErrorState(this.error);
+}
+
+class ShopChangeLanguageState extends ShopStates{}
+
+class ShopGetProductDetailsLoadingState extends ShopStates{}
+class ShopGetProductDetailsSuccessState extends ShopStates{}
+class ShopGetProductDetailsErrorState extends ShopStates{
+  final String error;
+
+  ShopGetProductDetailsErrorState(this.error);
+}
+
+class ShopChangeSmoothIndicatorState extends ShopStates{}
+
+class ShopGetProfileLoadingState extends ShopStates{}
+class ShopGetProfileSuccessState extends ShopStates{}
+class ShopGetProfileErrorState extends ShopStates{
+  final String error;
+
+  ShopGetProfileErrorState(this.error);
+}
+
+class ShopGetUpdateProfileLoadingState extends ShopStates{}
+class ShopGetUpdateProfileSuccessState extends ShopStates{
+  final UpdateProfileModel updateProfileModel;
+
+  ShopGetUpdateProfileSuccessState(this.updateProfileModel);
+}
+class ShopGetUpdateProfileErrorState extends ShopStates{
+  final String error;
+
+  ShopGetUpdateProfileErrorState(this.error);
+}
+
+class ShopGetSearchLoadingState extends ShopStates{}
+class ShopGetSearchSuccessState extends ShopStates{}
+class ShopGetSearchErrorState extends ShopStates{
+  final String error;
+
+  ShopGetSearchErrorState(this.error);
 }
