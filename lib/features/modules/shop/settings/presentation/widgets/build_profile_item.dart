@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:group_monday_m1/core/layout/shop_layout/controller/cubit/cubit.dart';
 import 'package:group_monday_m1/core/layout/shop_layout/controller/cubit/state.dart';
+import 'package:group_monday_m1/core/shared/network/local/cache_helper.dart';
 import 'package:group_monday_m1/core/shared/themes/cubit/cubit.dart';
 import 'package:group_monday_m1/core/shared/widgets/my_button.dart';
 import 'package:group_monday_m1/core/shared/widgets/my_text_form_field.dart';
+import 'package:group_monday_m1/features/modules/login/login_screen.dart';
 import 'package:group_monday_m1/features/modules/shop/settings/data/model/profile_model.dart';
+import 'package:group_monday_m1/features/modules/shop/users/presentation/screens/shop_login_screen.dart';
 
 class BuildProfileItem extends StatelessWidget {
   final ProfileDataModel model;
@@ -82,6 +85,34 @@ class BuildProfileItem extends StatelessWidget {
                       );
                     },
                     text: 'Update',
+                    background: ThemeCubit.get(context).isDark
+                        ? Colors.blue
+                        : Colors.deepOrange,
+                    radius: 15.0,
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const SizedBox(
+                    height: 30.0,
+                  ),
+                  MyButton(
+                    onPressed: () {
+                      CacheHelper.removeData('token').then(
+                        (value) {
+                          if(context.mounted) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ShopLoginScreen(),
+                              ),
+                            );
+                          }
+                        },
+                      );
+                    },
+                    text: 'LogOut',
                     background: ThemeCubit.get(context).isDark
                         ? Colors.blue
                         : Colors.deepOrange,
